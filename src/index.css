@@ -1,0 +1,547 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --gold:     #a0792a;
+  --dark:     #1a1a2e;
+  --light-bg: #fdf9f3;
+  --text:     #2c2c2c;
+  --muted:    #666;
+  --border:   #e8e0d0;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: var(--light-bg);
+  color: var(--text);
+  line-height: 1.6;
+  font-size: 16px;
+}
+
+#root { min-height: 100vh; }
+
+/* ── NAV ──────────────────────────────────────────────── */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--dark);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0.75rem 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.35);
+}
+.nav-brand { color: #fff; font-size: 0.9rem; font-weight: 700; }
+.nav-links { display: flex; gap: 0.15rem; list-style: none; }
+.nav-links a {
+  color: #ccc; text-decoration: none;
+  font-size: 0.75rem; padding: 0.3rem 0.55rem;
+  border-radius: 4px; transition: background 0.2s, color 0.2s;
+}
+.nav-links a:hover { background: rgba(255,255,255,0.1); color: #fff; }
+
+/* ── HERO ─────────────────────────────────────────────── */
+.hero { position: relative; width: 100%; max-height: 380px; overflow: hidden; }
+.hero img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
+.hero-overlay {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 1rem 1.25rem;
+  background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 100%);
+}
+.hero-tagline { color: #fff; font-size: 0.82rem; font-style: italic; text-shadow: 0 1px 4px rgba(0,0,0,0.7); }
+
+/* ── SHARED SECTION ───────────────────────────────────── */
+section { padding: 1.75rem 1rem; }
+.section-inner { width: 100%; max-width: 680px; margin: 0 auto; }
+section + section { border-top: 1px solid var(--border); }
+.intro-section { text-align: center; }
+
+.section-label {
+  display: inline-block; font-size: 0.68rem; font-weight: 700;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 0.35rem;
+}
+.section-title { font-size: 1.4rem; font-weight: 800; color: var(--dark); margin-bottom: 0.5rem; line-height: 1.25; }
+.section-intro { color: var(--muted); font-size: 0.9rem; margin-bottom: 1.25rem; }
+
+/* ── HOME SCREEN ──────────────────────────────────────── */
+.home-screen {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #000;
+}
+.home-hero {
+  position: relative;
+  flex: 1;
+  overflow: hidden;
+  min-height: 0;
+}
+.home-hero img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center top;
+  display: block;
+}
+.home-overlay {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 1.25rem 1.25rem 1.5rem;
+  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%);
+}
+.home-quote {
+  color: #fff; font-size: 0.85rem; font-style: italic;
+  line-height: 1.55; text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+}
+.home-quote strong { font-style: normal; color: #f0c040; }
+.home-actions {
+  padding: 1.25rem 1.5rem 2rem;
+  background: #000;
+}
+.home-btn {
+  display: block; width: 100%;
+  padding: 1rem;
+  border-radius: 50px; border: none;
+  background: #a0792a;
+  color: #fff;
+  font-size: 1.05rem; font-weight: 700;
+  letter-spacing: 0.5px;
+  cursor: pointer; font-family: inherit;
+  transition: opacity 0.2s, transform 0.15s;
+}
+.home-btn:active { opacity: 0.85; transform: scale(0.97); }
+
+/* ── PANEL SECTION ────────────────────────────────────── */
+.panel-section {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1.5rem 1rem 2rem;
+  transition: background 0.6s ease;
+  overflow-x: clip;
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.panel-header {
+  display: flex; align-items: center; gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+.panel-header .section-label { margin-bottom: 0; white-space: nowrap; }
+
+.progress-track {
+  flex: 1; height: 4px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 99px; overflow: hidden;
+}
+.progress-fill {
+  height: 100%; border-radius: 99px;
+  transition: width 0.5s ease, background 0.4s;
+}
+
+/* ── CARD STAGE ───────────────────────────────────────── */
+.card-stage {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto 1rem;
+}
+
+/* Main image card — shared perspective + dark interior visible as faces open */
+.image-card {
+  position: relative;
+  z-index: 1;
+  border-radius: 14px;
+  background: transparent;
+  box-shadow:
+    0 2px 4px rgba(0,0,0,0.3),
+    0 8px 24px rgba(0,0,0,0.5),
+    0 24px 60px rgba(0,0,0,0.35);
+  transform-origin: center center;
+  will-change: transform, opacity;
+  transform-style: preserve-3d;
+  perspective: 220px;
+}
+
+/* ── CARD HALVES ─────────────────────────────────────── */
+.card-half {
+  position: absolute;
+  top: 0; width: 50%; height: 100%;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.card-half--left  { left: 0;  transform-origin: left center; }
+.card-half--right { right: 0; transform-origin: right center; }
+
+/* Image-clipping wrapper — overflow:hidden here instead of card-half so
+   transform-style:preserve-3d is not killed on the parent */
+.half-front {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  overflow: hidden;
+}
+.card-half--left   .half-front { border-radius: 14px 0 0 14px; }
+.card-half--right  .half-front { border-radius: 0 14px 14px 0; }
+.card-half--top    .half-front { border-radius: 14px 14px 0 0; }
+.card-half--bottom .half-front { border-radius: 0 0 14px 14px; }
+
+/* Thickness side-face — perpendicular panel visible as face rotates.
+   Width/height = physical depth of the cube face. */
+.half-side {
+  position: absolute;
+  background: linear-gradient(to bottom, #444, #111 50%, #444);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+/* Y-axis: side face at the INNER edge (card centre seam) */
+.card-half--left  .half-side { top: 0; right: 0; width: 24px; height: 100%; transform-origin: right center;  transform: rotateY(90deg);  }
+.card-half--right .half-side { top: 0; left: 0;  width: 24px; height: 100%; transform-origin: left center;   transform: rotateY(-90deg); }
+/* X-axis: side face at the INNER edge (card centre seam) */
+.card-half--top    .half-side { bottom: 0; left: 0; width: 100%; height: 24px; transform-origin: bottom center; transform: rotateX(90deg);  }
+.card-half--bottom .half-side { top: 0;    left: 0; width: 100%; height: 24px; transform-origin: top center;    transform: rotateX(-90deg); }
+
+/* Behind card — next panel's image revealed as front card's halves peel away */
+.image-card--behind {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: 14px;
+  overflow: hidden;
+}
+.image-card--behind img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* X-SPLIT exit — horizontal mirror of leave-left: halves pivot at outer edges, same perspective/easing */
+.image-card.leave-x-split .card-half--top    { transform-origin: top center;    animation: splitOpenTop    0.68s cubic-bezier(0.4, 0, 0.8, 0.6) forwards; }
+.image-card.leave-x-split .card-half--bottom { transform-origin: bottom center; animation: splitOpenBottom 0.68s cubic-bezier(0.4, 0, 0.8, 0.6) forwards; }
+/* X-SPLIT entry — reverse */
+.image-card.enter-x-split .card-half--top    { transform-origin: top center;    animation: splitCloseTop    0.68s cubic-bezier(0.2, 0, 0.2, 1); }
+.image-card.enter-x-split .card-half--bottom { transform-origin: bottom center; animation: splitCloseBottom 0.68s cubic-bezier(0.2, 0, 0.2, 1); }
+
+@keyframes splitOpenTop {
+  from { transform: rotateX(0deg);                     }
+  50%  { transform: rotateX(50deg)  translateZ(40px);  }
+  to   { transform: rotateX(90deg)  translateZ(0px);   }
+}
+@keyframes splitOpenBottom {
+  from { transform: rotateX(0deg);                     }
+  50%  { transform: rotateX(-50deg) translateZ(40px);  }
+  to   { transform: rotateX(-90deg) translateZ(0px);   }
+}
+@keyframes splitCloseTop {
+  from { transform: rotateX(90deg)  translateZ(0px);   }
+  50%  { transform: rotateX(50deg)  translateZ(40px);  }
+  to   { transform: rotateX(0deg);                     }
+}
+@keyframes splitCloseBottom {
+  from { transform: rotateX(-90deg) translateZ(0px);   }
+  50%  { transform: rotateX(-50deg) translateZ(40px);  }
+  to   { transform: rotateX(0deg);                     }
+}
+
+/* Enter going next — card appears in place once halves have opened; the behind card already revealed it */
+.image-card.enter-instant { animation: none; }
+/* Kept for initial panel reveal on first load */
+.image-card.enter-right { animation: revealCenter 0.5s cubic-bezier(0.22, 1, 0.36, 1); }
+/* Enter going prev — halves close inward from outside to center */
+.image-card.enter-left .card-half--left  { animation: splitCloseLeft  0.68s cubic-bezier(0.2, 0, 0.2, 1); }
+.image-card.enter-left .card-half--right { animation: splitCloseRight 0.68s cubic-bezier(0.2, 0, 0.2, 1); }
+
+/* Exit going next — halves rotate open outward like a book */
+.image-card.leave-left .card-half--left  { animation: splitOpenLeft  0.68s cubic-bezier(0.4, 0, 0.8, 0.6) forwards; }
+.image-card.leave-left .card-half--right { animation: splitOpenRight 0.68s cubic-bezier(0.4, 0, 0.8, 0.6) forwards; }
+/* Exit going prev — quick fade */
+.image-card.leave-right { animation: leaveLeft 0.3s ease-in forwards; }
+
+/* X-OPEN exit — outer edges peel backward, pivoting at the center seam (opens outward) */
+.image-card.leave-x-open .card-half--top    { transform-origin: bottom center; animation: rotX90Pos 0.68s cubic-bezier(0.4, 0, 0.8, 0.6) forwards; }
+.image-card.leave-x-open .card-half--bottom { transform-origin: top center;    animation: rotX90Neg 0.68s cubic-bezier(0.4, 0, 0.8, 0.6) forwards; }
+/* Side faces move to the outer edges so thickness shows as the outer edge peels back */
+.image-card.leave-x-open .card-half--top    .half-side { top: 0; bottom: auto; transform-origin: top center;    transform: rotateX(-90deg); }
+.image-card.leave-x-open .card-half--bottom .half-side { bottom: 0; top: auto; transform-origin: bottom center; transform: rotateX(90deg);  }
+
+/* X-FOLD exit — halves fold toward viewer, pivoting at the card center seam */
+.image-card.leave-x-fold .card-half--top    { transform-origin: bottom center; animation: rotX90Neg 0.68s cubic-bezier(0.4, 0, 0.8, 0.6) forwards; }
+.image-card.leave-x-fold .card-half--bottom { transform-origin: top center;    animation: rotX90Pos 0.68s cubic-bezier(0.4, 0, 0.8, 0.6) forwards; }
+
+/* X-CLOSE entry — reverse of x-open (outer edges swing back in from behind) */
+.image-card.enter-x-close .card-half--top    { transform-origin: bottom center; animation: rotX90PosClose 0.68s cubic-bezier(0.2, 0, 0.2, 1); }
+.image-card.enter-x-close .card-half--bottom { transform-origin: top center;    animation: rotX90NegClose 0.68s cubic-bezier(0.2, 0, 0.2, 1); }
+/* Side faces match leave-x-open so they appear in the same position on entry */
+.image-card.enter-x-close .card-half--top    .half-side { top: 0; bottom: auto; transform-origin: top center;    transform: rotateX(-90deg); }
+.image-card.enter-x-close .card-half--bottom .half-side { bottom: 0; top: auto; transform-origin: bottom center; transform: rotateX(90deg);  }
+
+/* X-UNFOLD entry — reverse of x-fold (halves unfold from folded position back to flat) */
+.image-card.enter-x-unfold .card-half--top    { transform-origin: bottom center; animation: rotX90NegClose 0.68s cubic-bezier(0.2, 0, 0.2, 1); }
+.image-card.enter-x-unfold .card-half--bottom { transform-origin: top center;    animation: rotX90PosClose 0.68s cubic-bezier(0.2, 0, 0.2, 1); }
+
+/* NEXT exit — shared perspective on parent makes both halves one cube face */
+@keyframes splitOpenLeft {
+  from { transform: rotateY(0deg)   translateZ(0px);  }
+  50%  { transform: rotateY(-50deg) translateZ(40px); }
+  to   { transform: rotateY(-90deg) translateZ(0px);  }
+}
+@keyframes splitOpenRight {
+  from { transform: rotateY(0deg)  translateZ(0px);  }
+  50%  { transform: rotateY(50deg) translateZ(40px); }
+  to   { transform: rotateY(90deg) translateZ(0px);  }
+}
+@keyframes revealCenter {
+  from { opacity: 0; transform: scale(0.88); }
+  to   { opacity: 1; transform: scale(1);    }
+}
+/* PREV entry — same cube feel, closing inward */
+@keyframes splitCloseLeft {
+  from { transform: rotateY(-90deg) translateZ(0px);  }
+  50%  { transform: rotateY(-50deg) translateZ(40px); }
+  to   { transform: rotateY(0deg)   translateZ(0px);  }
+}
+@keyframes splitCloseRight {
+  from { transform: rotateY(90deg)  translateZ(0px);  }
+  50%  { transform: rotateY(50deg)  translateZ(40px); }
+  to   { transform: rotateY(0deg)   translateZ(0px);  }
+}
+@keyframes leaveLeft {
+  from { opacity: 1; transform: scale(1);    }
+  to   { opacity: 0; transform: scale(0.95); }
+}
+@keyframes enterLeft {
+  from { transform: perspective(900px) translateX(-80px) rotateY(-45deg) scale(0.85); opacity: 0; }
+  to   { transform: perspective(900px) translateX(0)     rotateY(0deg)   scale(1);    opacity: 1; }
+}
+@keyframes leaveRight {
+  from { transform: perspective(900px) translateX(0)    rotateY(0deg)   scale(1);    opacity: 1; }
+  to   { transform: perspective(900px) translateX(80px) rotateY(45deg)  scale(0.85); opacity: 0; }
+}
+
+/* X-axis shared keyframes — transform-origin set per animation class above */
+@keyframes rotX90Neg {
+  from { transform: rotateX(0deg);    }
+  50%  { transform: rotateX(-50deg) translateZ(40px); }
+  to   { transform: rotateX(-90deg); }
+}
+@keyframes rotX90Pos {
+  from { transform: rotateX(0deg);   }
+  50%  { transform: rotateX(50deg) translateZ(40px); }
+  to   { transform: rotateX(90deg); }
+}
+@keyframes rotX90NegClose {
+  from { transform: rotateX(-90deg); }
+  50%  { transform: rotateX(-50deg) translateZ(40px); }
+  to   { transform: rotateX(0deg);   }
+}
+@keyframes rotX90PosClose {
+  from { transform: rotateX(90deg); }
+  50%  { transform: rotateX(50deg) translateZ(40px); }
+  to   { transform: rotateX(0deg);  }
+}
+
+/* Landscape panel: full viewport width, breaking out of any container padding */
+.card-stage--landscape {
+  width: 100vw;
+  max-width: 100vw;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Images inside halves — each shows its 50% of the full image */
+.panel-img { display: block; }
+
+/* Left/right halves: each image is 200% wide, anchored to respective edge */
+.card-half--left .panel-img,
+.card-half--right .panel-img {
+  position: absolute;
+  top: 0; width: 200%; height: 100%;
+  object-fit: cover;
+}
+.card-half--left  .panel-img { left: 0; }
+.card-half--right .panel-img { right: 0; }
+
+/* Top/bottom halves for X-axis split animations */
+.card-half--top,
+.card-half--bottom {
+  width: 100%;
+  height: 50%;
+}
+.card-half--top    { top: 0;    left: 0; }
+.card-half--bottom { top: auto; bottom: 0; left: 0; }
+
+/* Top/bottom images: 200% tall, anchored to respective edge */
+.card-half--top .panel-img,
+.card-half--bottom .panel-img {
+  position: absolute;
+  left: 0; width: 100%; height: 200%;
+  object-fit: cover;
+}
+.card-half--top    .panel-img { top: 0;    object-position: top center; }
+.card-half--bottom .panel-img { bottom: 0; object-position: bottom center; }
+
+/* Label bar floats above both halves */
+.img-label-bar {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  z-index: 20;
+  padding: 0.55rem 0.9rem;
+  background: rgba(0,0,0,0.7);
+  border-top: 2px solid transparent;
+  display: flex; align-items: center;
+  border-radius: 0 0 14px 14px;
+}
+.img-label {
+  font-size: 0.7rem; font-weight: 800;
+  letter-spacing: 1.3px; text-transform: uppercase;
+}
+
+/* ── DOT NAV ──────────────────────────────────────────── */
+.dot-nav {
+  display: flex; justify-content: center; gap: 0.4rem;
+  margin: 1rem 0 0;
+}
+.dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  transition: background 0.3s, transform 0.25s;
+  flex-shrink: 0;
+  border: none; padding: 0; cursor: pointer;
+}
+.dot.past    { background: rgba(255,255,255,0.45); }
+.dot.active  { transform: scale(1.45); }
+
+/* ── ARROW CONTROLS ───────────────────────────────────── */
+.arrow-controls {
+  display: flex; align-items: center; justify-content: center; gap: 1.25rem;
+  margin-top: 0.85rem;
+}
+.arrow-btn {
+  width: 44px; height: 44px;
+  border-radius: 50%; border: 2px solid;
+  background: transparent;
+  font-size: 1.6rem; line-height: 1;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-family: inherit;
+  transition: background 0.2s, transform 0.15s, opacity 0.2s;
+  padding-bottom: 2px;
+}
+.arrow-btn:disabled { opacity: 0.2; cursor: not-allowed; }
+.arrow-btn:not(:disabled):hover { background: rgba(255,255,255,0.1); }
+.arrow-btn:not(:disabled):active { transform: scale(0.9); }
+
+.panel-counter {
+  font-size: 0.8rem; font-weight: 700;
+  letter-spacing: 0.5px; min-width: 44px; text-align: center;
+}
+
+/* ── CONTENT PANEL ────────────────────────────────────── */
+.content-panel {
+  margin-top: 1.25rem;
+  background: rgba(255,255,255,0.06);
+  border-radius: 14px;
+  padding: 1.2rem;
+  animation: panelIn 0.35s ease;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+@keyframes panelIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.content-title { font-size: 1rem; font-weight: 800; line-height: 1.35; margin-bottom: 0.6rem; }
+.content-body  { font-size: 0.87rem; color: #bbb; line-height: 1.72; margin-bottom: 0.85rem; }
+.content-verse {
+  background: rgba(0,0,0,0.3); border-radius: 10px;
+  padding: 0.7rem 0.9rem; border-left: 3px solid;
+}
+.verse-text { font-style: italic; font-size: 0.83rem; line-height: 1.6; color: #ccc; }
+.verse-ref  { display: block; margin-top: 0.3rem; font-size: 0.72rem; font-weight: 700; color: #888; }
+
+/* ── CTA ──────────────────────────────────────────────── */
+.cta-btn {
+  display: block; width: 100%; max-width: 420px;
+  margin: 1.35rem auto 0;
+  padding: 1rem; border-radius: 50px;
+  border: none; color: #fff;
+  font-size: 1rem; font-weight: 700; cursor: pointer; font-family: inherit;
+  transition: opacity 0.2s, transform 0.15s;
+}
+.cta-btn:active { opacity: 0.84; transform: scale(0.97); }
+
+/* ── PRAYER ───────────────────────────────────────────── */
+.prayer-section {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  color: #fff;
+}
+.prayer-section .section-label { color: #f0c040; }
+.prayer-section .section-title { color: #fff; }
+.prayer-section .section-intro { color: #bbb; }
+
+.prayer-card {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 14px; padding: 1.3rem;
+  font-size: 0.93rem; line-height: 1.88; color: #eee; font-style: italic;
+}
+.prayer-card p + p { margin-top: 0.85rem; }
+.prayer-note { margin-top: 1rem; font-size: 0.8rem; color: #9dc; line-height: 1.65; }
+
+/* ── SHARE ────────────────────────────────────────────── */
+.share-section { text-align: center; }
+.share-buttons { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1.25rem; }
+.share-btn {
+  display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+  padding: 0.85rem 1.25rem; border-radius: 50px; border: none;
+  font-size: 0.88rem; font-weight: 700; cursor: pointer;
+  text-decoration: none; font-family: inherit;
+  transition: opacity 0.2s, transform 0.15s;
+}
+.share-btn:active { opacity: 0.82; transform: scale(0.97); }
+.share-btn.copy { background: var(--dark); color: #fff; }
+.share-btn.wa   { background: #25D366; color: #fff; }
+.share-btn.fb   { background: #1877F2; color: #fff; }
+
+.copied-toast {
+  margin-top: 0.65rem; font-size: 0.82rem;
+  color: #27ae60; font-weight: 600;
+  animation: fadeInUp 0.2s ease;
+}
+
+/* ── FOOTER ───────────────────────────────────────────── */
+footer {
+  background: var(--dark); color: #aaa; text-align: center;
+  padding: 1.5rem 1rem; font-size: 0.77rem; line-height: 1.9;
+  border-top: 1px solid #2a2a3a;
+}
+footer strong { color: #fff; }
+
+/* ── ANIMATIONS ───────────────────────────────────────── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.phase-enter { animation: fadeInUp 0.55s ease; }
+
+/* ── TABLET ───────────────────────────────────────────── */
+@media (min-width: 640px) {
+  .hero { max-height: 460px; }
+  section { padding: 2.25rem 2rem; }
+  .panel-section { padding: 2rem 2rem 2.5rem; }
+  .section-title { font-size: 1.65rem; }
+  .share-buttons { flex-direction: row; justify-content: center; }
+  .share-btn { min-width: 155px; }
+  .card-stage { max-width: 480px; }
+  .card-stage--landscape { width: 100vw; max-width: 100vw; }
+}
+
+/* ── DESKTOP ──────────────────────────────────────────── */
+@media (min-width: 1024px) {
+  nav { padding: 0.75rem 3rem; }
+  .nav-brand { font-size: 1rem; }
+  .nav-links a { font-size: 0.85rem; padding: 0.38rem 0.7rem; }
+  section { padding: 3rem 2rem; }
+  .panel-section { padding: 2.5rem 2rem 3rem; }
+  .hero { max-height: 520px; }
+  .card-stage { max-width: 520px; }
+  .card-stage--landscape { width: 100vw; max-width: 100vw; }
+}
