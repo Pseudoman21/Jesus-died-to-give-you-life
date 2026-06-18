@@ -5,14 +5,14 @@ import img1    from './assets/evange-cube/1.png'
 import img2    from './assets/evange-cube/2.png'
 import img3    from './assets/evange-cube/3.png'
 import img4    from './assets/evange-cube/4.png'
-import imgRose from './assets/evange-cube/Jesus came back to life.png'
-import img5    from './assets/evange-cube/5.png'
-import img6    from './assets/evange-cube/6.png'
+import imgRose from './assets/evange-cube/5.png'
+import img5    from './assets/evange-cube/6.png'
+import img6    from './assets/evange-cube/7.png'
 
 const PANELS = [
   {
     image: img1,
-    ratio: '1029/1024',
+    ratio: '861/855',
     bg: '#0a0a0a',
     accent: '#c0392b',
     label: 'Hakbang 1 ng 7',
@@ -21,7 +21,7 @@ const PANELS = [
   },
   {
     image: img2,
-    ratio: '736/1453',
+    ratio: '745/1424',
     bg: '#1a1200',
     accent: '#d4a017',
     label: 'Hakbang 2 ng 7',
@@ -30,7 +30,7 @@ const PANELS = [
   },
   {
     image: img3,
-    ratio: '745/1424',
+    ratio: '1426/736',
     bg: '#2c0000',
     accent: '#e74c3c',
     label: 'Hakbang 3 ng 7',
@@ -39,7 +39,7 @@ const PANELS = [
   },
   {
     image: img4,
-    ratio: '1426/736',
+    ratio: '1035/1024',
     bg: '#1e1e1e',
     accent: '#95a5a6',
     label: 'Hakbang 4 ng 7',
@@ -48,7 +48,7 @@ const PANELS = [
   },
   {
     image: imgRose,
-    ratio: '1035/1024',
+    ratio: '736/1441',
     bg: '#071a07',
     accent: '#27ae60',
     label: 'Hakbang 5 ng 7',
@@ -57,7 +57,7 @@ const PANELS = [
   },
   {
     image: img5,
-    ratio: '736/1441',
+    ratio: '736/1453',
     bg: '#0d0a00',
     accent: '#f39c12',
     label: 'Hakbang 6 ng 7',
@@ -120,12 +120,12 @@ function PanelSection() {
     const isNext = to > from
     let style
     if (isNext) {
-      if (from === 0 || from === 4) style = 'x-split'
-      else if (from === 2 || from === 5) style = 'x-fold'
+      if (from === 0 || from === 3) style = 'x-split'
+      else if (from === 5) style = 'x-fold'
       else style = 'y'
     } else {
-      if (to === 0 || to === 4) style = 'x-split'
-      else if (to === 2 || to === 5) style = 'x-fold'
+      if (to === 0 || to === 3) style = 'x-split'
+      else if (to === 5) style = 'x-fold'
       else style = 'y'
     }
     const exitClass = isNext
