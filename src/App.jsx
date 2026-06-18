@@ -215,9 +215,7 @@ function PanelSection() {
               <div className="half-side" />
             </div>
           </>)}
-          <div className="img-label-bar" style={{ borderTopColor: cur.accent }}>
-            <span className="img-label" style={{ color: cur.accent }}>{cur.tagLine}</span>
-          </div>
+
         </div>
       </div>
 
